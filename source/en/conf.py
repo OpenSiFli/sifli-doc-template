@@ -50,7 +50,8 @@ html_context = {
     "current_version": version,
 }
 
-
+html_logo = '../_static/logo_white.png'
+html_favicon = '../_static/logo_favicon.png'
 html_show_sourcelink = False
 
 html_theme_options = {
