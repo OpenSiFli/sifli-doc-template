@@ -4,17 +4,17 @@
         "type": "branch"
     },
     {
-        "version": "v2.4.3"
+        "version": "v1.0.0"
     },
     {
-        "version": "v2.4",
+        "version": "v1.0",
         "type": "branch"
     },
     {
-        "version": "v2.3.6"
+        "version": "v1.1.0"
     },
     {
-        "version": "v2.3",
+        "version": "v1.1",
         "type": "branch"
     }
 ]
