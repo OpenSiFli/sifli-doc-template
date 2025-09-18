@@ -1,0 +1,21 @@
+[
+    {
+        "version": "latest",
+        "type": "branch"
+    },
+    {
+        "version": "v2.4.3"
+    },
+    {
+        "version": "v2.4",
+        "type": "branch"
+    },
+    {
+        "version": "v2.3.6"
+    },
+    {
+        "version": "v2.3",
+        "type": "branch"
+    }
+]
+
