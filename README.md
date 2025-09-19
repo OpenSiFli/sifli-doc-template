@@ -14,6 +14,9 @@ python generate_docs.py --lang zh_CN --version latest
 
 双击`build/zh_CN/html/index.html`可以打开生成的中文文档。
 
+点击[链接]((https://docs.sifli.com/projects/doc-template/latest/zh_CN/index.html))浏览网站效果
+
+
 ## 定制
 ### 项目名称
 项目配置文件位于`source/en/conf.py`和`source/zh_CN/conf.py`，分别对应英文版和中文版
