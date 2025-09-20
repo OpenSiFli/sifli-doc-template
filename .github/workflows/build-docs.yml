@@ -38,7 +38,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          submodules: 'recursive'
+          fetch-depth: 0
+          # uncomment the line below if submodule is used
+          # submodules: true
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -107,4 +109,4 @@ jobs:
           export TENCENTCLOUD_SECRET_ID=${{ secrets.COS_DOCS_SECRET_ID }}
           export TENCENTCLOUD_SECRET_KEY=${{ secrets.COS_DOCS_SECRET_KEY }}
           export TENCENTCLOUD_REGION=${{ secrets.COS_DOCS_REGION }}
-          tccli cdn PurgePathCache --cli-unfold-argument --Paths 'https://docs.sifli.com/projects/doc-template/' --FlushType flush
+          tccli cdn PurgePathCache --cli-unfold-argument --Paths "https://docs.sifli.com/projects/${PROJ_NAME}/" --FlushType flush
