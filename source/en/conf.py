@@ -25,12 +25,15 @@ extensions = [
               "sphinx_design",
               "sphinx_selective_exclude.eager_only",
               "sphinx_selective_exclude.search_auto_exclude",
+              "sphinx_last_updated_by_git",
 ]
 
 templates_path = ['../_templates']
 exclude_patterns = []
 version = os.environ.get('SIFLI_DOC_VERSION', 'latest')
-language = 'zh_CN'
+language = 'en'
+git_last_updated_timezone = 'Asia/Shanghai'
+html_last_updated_fmt = '%Y-%m-%d %H:%M:%S'
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
