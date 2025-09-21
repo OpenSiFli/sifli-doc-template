@@ -53,7 +53,6 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-          pip install https://github.com/OpenSiFli/shibuya-sifli/releases/download/2024.12.21%2Bsifli.3/shibuya-2024.12.21+sifli.3-py3-none-any.whl
          
       - name: Install upload tools
         run: |
