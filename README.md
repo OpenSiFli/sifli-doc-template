@@ -1,10 +1,11 @@
 # `docs.sifl.com/projects`文档模板
 
-## Install toolchain
-1. Install Python 3.x
-1. Execute `pip install -r requirements.txt` in command line. It would install all modules needed by the document building except theme.
+## 安装工具链
+1. 安装 Python 3.x，并确保在命令行中执行`python --version`能显示python版本
+1. 在命令行中执行 `pip install -r requirements.txt`，安装编译文档所需的工具包`sifli-docs-toolbox`
 
-## Build the document
+## 生成文档
+在文档根目录的命令行下执行下面的命令即可生成文档，
 ```shell
 sf-build-docs --lang zh_CN --version latest
 ```
@@ -13,7 +14,7 @@ sf-build-docs --lang zh_CN --version latest
 
 双击`build/zh_CN/html/index.html`可以打开生成的中文文档。
 
-点击[链接]((https://docs.sifli.com/projects/doc-template/latest/zh_CN/index.html))浏览网站效果
+点击[链接](https://docs.sifli.com/projects/doc-template/latest/zh_CN/index.html)浏览网站效果
 
 
 ## 定制
@@ -23,21 +24,21 @@ sf-build-docs --lang zh_CN --version latest
 把`conf.py`里的`project`变量值由`foo`改为实际项目的名字即可修改项目名称
 
 ### 部署的网站路径
-文件`.github\workflows\build-docs.yml`为github的`Actions`配置文件，修改其中`PROJ_NAME`环境变量即可修改文档的部署地址，如把`PROJ_NAME`由`doc-template`改为`test-doc`，部署的文档网址就是`docs.sifli.com/projects/test-doc`，包含版本号和语言的网站路径为
-`docs.sifli.com/projects/test-doc/latest/en`和`docs.sifli.com/projects/test-doc/latest/zh_CN`
+文件`.github\workflows\build-docs.yml`为github的`Actions`配置文件，修改其中`PROJ_NAME`环境变量即可修改文档的部署地址，如把`PROJ_NAME`由`doc-template`改为`test-doc`，部署的文档网址就是`docs.sifli.com/projects/test-doc`，包含版本号和语言的网址则是
+`docs.sifli.com/projects/test-doc/latest/en`和`docs.sifli.com/projects/test-doc/latest/zh_CN`，`latest`为版本号，`en`和`zh_CN`为语言。
 
 提交后会自动触发文档的编译，没有标签的节点会以`latest`版本编译，有标签的节点则以标签名称为版本号编译。
 
 ### 版本号
-根目录下的`version.json`为版本号列表，在其中添加需要在版本下拉框中选择的版本号，同时还支持分支的最新节点版本，由`"type": "branch"`来指定，类似主分支的latest版本，他表示某个分支的最新版本。
+根目录下的`version.json`为版本号列表，在其中添加需要在版本下拉框中显示的版本号，同时还支持分支版本，由`"type": "branch"`指定，类似主分支的latest版本，他表示某个分支的最新版本。
 
-如果不需要版本选择框，可以把`conf.py`里`html_context`字典中的`versions`删除
+如果不需要版本选择框，可以修改`conf.py`，将`html_context`字典中的`versions`删除，如下
 ```py
 del html_context['versions']
 ```
 
 ### 多语言
-如果不需要配置选择语言，可以把`conf.py`里`html_context`字典中的`languages`删除
+如果不需要配置选择语言，可以修改`conf.py`，将`html_context`字典中的`languages`删除，如下
 
 ```py
 del html_context['languages']
