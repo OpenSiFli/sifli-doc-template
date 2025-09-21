@@ -63,13 +63,13 @@ jobs:
         working-directory: ./
         env:
           SIFLI_DOC_VERSION: ${{ steps.determine-version.outputs.VERSION }}
-        run: python generate_docs.py --lang=zh_CN
+        run: sf-build-docs --lang=zh_CN
       
       - name: Build en documentation for ${{ matrix.variant }}
         working-directory: ./
         env:
           SIFLI_DOC_VERSION: ${{ steps.determine-version.outputs.VERSION }}
-        run: python generate_docs.py --lang=en
+        run: sf-build-docs --lang=en
 
       - name: Configure COSCMD
         run: |

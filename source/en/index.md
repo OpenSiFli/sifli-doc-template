@@ -4,7 +4,7 @@
 
 ![](../assets/a2dp_arch.png)
 
-for test
+for test 2
 
 ```{toctree}
 :hidden:
