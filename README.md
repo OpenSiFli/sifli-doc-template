@@ -27,6 +27,25 @@ sf-build-docs --lang zh_CN --version latest
 文件`.github\workflows\build-docs.yml`为github的`Actions`配置文件，修改其中`PROJ_NAME`环境变量即可修改文档的部署地址，如把`PROJ_NAME`由`doc-template`改为`test-doc`，部署的文档网址就是`docs.sifli.com/projects/test-doc`，包含版本号和语言的网址则是
 `docs.sifli.com/projects/test-doc/latest/en`和`docs.sifli.com/projects/test-doc/latest/zh_CN`，`latest`为版本号，`en`和`zh_CN`为语言。
 
+配置文件中屏蔽了push事件触发的文档构建流水线，放开如下的被注释掉的`push:`代码段就可以启用push事件，每次提交代码都会触发文档构建。
+
+```yaml
+on:
+  # Uncomment the following lines to enable automatic triggering on push events
+  # push:
+  #   branches:
+  #     - main
+  #     - 'release/*'
+  #   paths:
+  #     - 'source/**'
+  #   tags:
+  #     - '*'
+  workflow_dispatch:  # 允许手动触发
+
+```
+
+
+
 提交后会自动触发文档的编译，没有标签的节点会以`latest`版本编译，有标签的节点则以标签名称为版本号编译。
 
 ### 版本号

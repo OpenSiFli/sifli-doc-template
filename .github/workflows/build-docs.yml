@@ -4,14 +4,15 @@ env:
   PROJ_NAME: doc-template
 
 on:
-  push:
-    branches:
-      - main
-      - 'release/*'
-    paths:
-      - 'source/**'
-    tags:
-      - '*'
+  # Uncomment the following lines to enable automatic triggering on push events
+  # push:
+  #   branches:
+  #     - main
+  #     - 'release/*'
+  #   paths:
+  #     - 'source/**'
+  #   tags:
+  #     - '*'
   workflow_dispatch:  # 允许手动触发
 
 jobs:
