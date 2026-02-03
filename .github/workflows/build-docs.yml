@@ -2,6 +2,8 @@ name: Build and Upload Documentation
 
 env:
   PROJ_NAME: doc-template
+  # Set to true if PDF is needed
+  PDF_ENABLED: false
 
 on:
   # Uncomment the following lines to enable automatic triggering on push events
@@ -46,13 +48,13 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.x'
+          python-version: '3.12'
           cache: 'pip'
 
       - name: Install dependencies
         working-directory: ./
         run: |
-          python -m pip install --upgrade pip
+          python -m pip install --upgrade pip==24.0
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
          
       - name: Install upload tools
@@ -60,17 +62,38 @@ jobs:
           sudo apt-get update
           pip install coscmd
 
-      - name: Build zh_CN documentation
+      - name: Build zh_CN PDF documentation
+        if: env.PDF_ENABLED == 'true'
         working-directory: ./
         env:
           SIFLI_DOC_VERSION: ${{ steps.determine-version.outputs.VERSION }}
-        run: sf-build-docs --lang=zh_CN
-      
-      - name: Build en documentation for ${{ matrix.variant }}
+        run: sf-build-docs --pdf --lang=zh_CN --clean
+
+
+      - name: Build zh_CN HTML documentation
+        if: env.PDF_ENABLED == 'true'
         working-directory: ./
         env:
           SIFLI_DOC_VERSION: ${{ steps.determine-version.outputs.VERSION }}
-        run: sf-build-docs --lang=en
+        run: sf-build-docs --lang=zh_CN --clean
+
+      - name: Build en PDF documentation
+        working-directory: ./
+        env:
+          SIFLI_DOC_VERSION: ${{ steps.determine-version.outputs.VERSION }}
+        run: sf-build-docs --pdf --lang=en --clean
+
+      - name: Build en HTML documentation
+        working-directory: ./
+        env:
+          SIFLI_DOC_VERSION: ${{ steps.determine-version.outputs.VERSION }}
+        run: sf-build-docs --lang=en --clean
+
+      - name: Copy PDF to html folder for upload
+        if: env.PDF_ENABLED == 'true'
+        run: |
+          cp ./build/en/simplepdf/*.pdf ./build/en/html/
+          cp ./build/zh_CN/simplepdf/*.pdf ./build/zh_CN/html/
 
       - name: Configure COSCMD
         run: |
@@ -79,8 +102,8 @@ jobs:
       - name: Upload documentation to COS
         run: |
           VERSION=${{ steps.determine-version.outputs.VERSION }}
-          coscmd upload -rs --delete --yes ./build/zh_CN//html/ projects/${PROJ_NAME}/$VERSION/zh_CN/
-          coscmd upload -rs --delete --yes ./build/en//html/ projects/${PROJ_NAME}/$VERSION/en/
+          coscmd upload -rs --delete --yes ./build/zh_CN/html/ projects/${PROJ_NAME}/$VERSION/zh_CN/
+          coscmd upload -rs --delete --yes ./build/en/html/ projects/${PROJ_NAME}/$VERSION/en/
           echo "Uploaded documentation to $VERSION/"
 
   finalize:
